@@ -11,12 +11,14 @@ import {
 } from "@headlessui/react";
 import Link from "next/link";
 import { User } from "@/types/User";
-// import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,8 +42,7 @@ function LoginForm() {
 
       const userData: User = await response.json();
 
-      console.log(userData);
-      //   redirect("/tickets");
+      router.replace("/tickets");
     } catch (error) {
       console.log(`Login error: ${error}`);
     } finally {
