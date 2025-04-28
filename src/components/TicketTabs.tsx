@@ -4,12 +4,13 @@ import Link from "next/link";
 interface TicketTabsProps {
   currentTab: string;
   tabsData: TabsData;
+  ticketCount: number;
 }
 
-function TicketTabs({ currentTab, tabsData }: TicketTabsProps) {
+function TicketTabs({ currentTab, tabsData, ticketCount }: TicketTabsProps) {
   const tabTitle = tabsData[currentTab as keyof TabsData];
   const tabs = Object.keys(tabsData);
-  const issuesCount = 128264;
+
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
@@ -22,7 +23,7 @@ function TicketTabs({ currentTab, tabsData }: TicketTabsProps) {
         </Link>
       </div>
       <div className="flex items-center justify-between">
-        <span>{issuesCount.toLocaleString("en-IN")} issues</span>
+        <span>{ticketCount.toLocaleString("en-IN")} issues</span>
         <div className="flex gap-1 border border-gray-400 p-1 rounded-sm">
           {tabs.map((tab) => {
             const isCurrentTab = currentTab === tab;

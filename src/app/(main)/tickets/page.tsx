@@ -1,6 +1,7 @@
 import TicketList from "@/components/TicketList";
 import TicketTabs from "@/components/TicketTabs";
-import React, { Suspense } from "react";
+import { Ticket } from "@/types/Ticket";
+import internalFetch from "@/utils/customFetch";
 
 type SearchParams = { tab: string };
 
@@ -27,12 +28,26 @@ async function TicketsPage({
     ? tab.toLowerCase()
     : "newest";
 
+  const response = await internalFetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/ticket/get-all-tickets?tab=${validTab}`,
+    {
+      method: "GET",
+      credentials: "include",
+      cache: "no-cache",
+    }
+  );
+
+  const { total, tickets }: { total: number; tickets: Ticket[] } =
+    await response.json();
+
   return (
     <div>
-      <TicketTabs currentTab={validTab} tabsData={tabsData} />
-      <Suspense fallback={"Loading Tickets..."}>
-        <TicketList currentTab={validTab} />
-      </Suspense>
+      <TicketTabs
+        currentTab={validTab}
+        tabsData={tabsData}
+        ticketCount={total}
+      />
+      <TicketList tickets={tickets} />
     </div>
   );
 }
