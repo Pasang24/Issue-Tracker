@@ -1,5 +1,6 @@
 import internalFetch from "@/utils/customFetch";
 import { Ticket } from "@/types/Ticket";
+import TicketCard from "./TicketCard";
 
 interface TicketListProps {
   currentTab: string;
@@ -20,10 +21,10 @@ async function TicketList({ currentTab }: TicketListProps) {
   console.log(tickets);
 
   return (
-    <div>
-      {tickets.map((ticket) => {
-        return <div key={ticket.id}>{ticket.title}</div>;
-      })}
+    <div className="flex flex-col gap-2 my-4">
+      {tickets.map((ticket) => (
+        <TicketCard ticket={ticket} key={ticket.id} />
+      ))}
     </div>
   );
 }
