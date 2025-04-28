@@ -1,5 +1,5 @@
 import TicketList from "@/components/TicketList";
-import TicketTabs from "@/components/TicketTabs";
+import TicketTabsWrapper from "@/components/TicketTabsWrapper";
 import { Ticket } from "@/types/Ticket";
 import internalFetch from "@/utils/customFetch";
 
@@ -42,7 +42,7 @@ async function TicketsPage({
 
   return (
     <div>
-      <TicketTabs
+      <TicketTabsWrapper
         currentTab={validTab}
         tabsData={tabsData}
         ticketCount={total}
