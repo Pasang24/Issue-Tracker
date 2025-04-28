@@ -45,7 +45,6 @@ function LoginForm() {
       router.replace("/tickets");
     } catch (error) {
       console.log(`Login error: ${error}`);
-    } finally {
       setLoading(false);
     }
   };
