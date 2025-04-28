@@ -1,6 +1,6 @@
 import TicketList from "@/components/TicketList";
 import TicketTabs from "@/components/TicketTabs";
-import React from "react";
+import React, { Suspense } from "react";
 
 type SearchParams = { tab: string };
 
@@ -30,7 +30,9 @@ async function TicketsPage({
   return (
     <div>
       <TicketTabs currentTab={validTab} tabsData={tabsData} />
-      <TicketList currentTab={validTab} />
+      <Suspense fallback={"Loading Tickets..."}>
+        <TicketList currentTab={validTab} />
+      </Suspense>
     </div>
   );
 }

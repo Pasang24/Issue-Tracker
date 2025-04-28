@@ -8,7 +8,7 @@ interface TicketListProps {
 
 async function TicketList({ currentTab }: TicketListProps) {
   const response = await internalFetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/ticket/get-all-tickets`,
+    `${process.env.NEXT_PUBLIC_API_URL}/ticket/get-all-tickets?tab=${currentTab}`,
     {
       method: "GET",
       credentials: "include",
@@ -17,8 +17,6 @@ async function TicketList({ currentTab }: TicketListProps) {
   );
 
   const { tickets }: { tickets: Ticket[] } = await response.json();
-
-  console.log(tickets);
 
   return (
     <div className="flex flex-col gap-2 my-4">
