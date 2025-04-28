@@ -16,6 +16,8 @@ function TicketTabsWrapper({
   const tabTitle = tabsData[currentTab as keyof TabsData];
   const tabs = Object.keys(tabsData);
 
+  const countValue = ticketCount ? ticketCount.toLocaleString("en-IN") : "No";
+
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
@@ -28,7 +30,7 @@ function TicketTabsWrapper({
         </Link>
       </div>
       <div className="flex items-center justify-between">
-        <span>{ticketCount.toLocaleString("en-IN")} issues</span>
+        <span>{countValue} issues</span>
         <TicketTabs currentTab={currentTab} tabs={tabs} />
       </div>
     </div>
