@@ -1,3 +1,4 @@
+import TicketList from "@/components/TicketList";
 import TicketTabs from "@/components/TicketTabs";
 import React from "react";
 
@@ -29,6 +30,7 @@ async function TicketsPage({
   return (
     <div>
       <TicketTabs currentTab={validTab} tabsData={tabsData} />
+      <TicketList currentTab={validTab} />
     </div>
   );
 }
