@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import NavLinks from "./NavLinks";
+import UserProfile from "./UserProfile";
 
 function Navbar() {
   return (
@@ -9,7 +10,7 @@ function Navbar() {
         Issue Tracker
       </Link>
       <NavLinks />
-      <div className="border w-8 h-8 rounded-full" />
+      <UserProfile />
     </nav>
   );
 }
