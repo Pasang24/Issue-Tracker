@@ -9,6 +9,7 @@ import {
   Label,
   Legend,
 } from "@headlessui/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 function TicketForm() {
@@ -16,8 +17,21 @@ function TicketForm() {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
+    try {
+      router.replace("/tickets");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const handleCancel = () => {
+    router.back();
   };
 
   return (
@@ -46,12 +60,13 @@ function TicketForm() {
             value={description}
             onChange={(event) => setDescription(event.target.value)}
             placeholder="Start writing..."
-            className="border border-gray-300 min-h-[200px] p-2 rounded-sm data-disabled:text-gray-400"
+            className="border border-gray-300 min-h-[300px] p-2 rounded-sm data-disabled:text-gray-400"
           />
         </Field>
         <div className="flex justify-end gap-2">
           <Button
-            type="submit"
+            type="button"
+            onClick={handleCancel}
             className="bg-[#4D5CDD] text-white text-sm font-medium rounded-sm p-2 data-disabled:opacity-70"
           >
             Cancel
