@@ -23,7 +23,7 @@ function TicketTabsWrapper({
       <div className="flex items-center justify-between mb-4">
         <span className="text-2xl">{tabTitle}</span>
         <Link
-          href="/create-ticket"
+          href="/tickets/create-ticket"
           className="bg-[#e93330] w-full max-w-[200px] text-center text-white text-sm p-2 font-medium rounded-sm hover:opacity-80"
         >
           Create Ticket
