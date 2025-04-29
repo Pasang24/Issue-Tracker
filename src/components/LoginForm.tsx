@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Button,
   Field,
@@ -12,12 +12,14 @@ import {
 import Link from "next/link";
 import { User } from "@/types/User";
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/context/UserProvider";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const { setUser } = useContext(UserContext);
   const router = useRouter();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -40,7 +42,9 @@ function LoginForm() {
         throw new Error("Login Failed");
       }
 
-      const userData: User = await response.json();
+      const { user }: { user: User } = await response.json();
+
+      setUser(user);
 
       router.replace("/tickets");
     } catch (error) {
