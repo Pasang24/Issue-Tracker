@@ -25,14 +25,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  let isAuthenticated = false;
-
   if (token) {
     try {
       await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET));
-
-      isAuthenticated = true;
     } catch (error) {
+      console.log(error);
       return NextResponse.redirect(
         new URL("/login", request.url)
       ).cookies.delete("token");

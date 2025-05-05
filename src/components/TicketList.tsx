@@ -20,7 +20,7 @@ async function TicketList({ tickets }: TicketListProps) {
     <div className="max-w-[400px] mx-auto my-4">
       <NoTicket />
       <p className="text-center">
-        Hooray! It seems we don't have any issue here.
+        Hooray! It seems we don&apos;t have any issue here.
       </p>
     </div>
   );

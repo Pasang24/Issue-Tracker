@@ -6,8 +6,6 @@ import { UserContext } from "@/context/UserProvider";
 function UserProfile() {
   const { user, loading } = useContext(UserContext);
 
-  console.log(user);
-
   return (
     <div className="flex items-center gap-2">
       {loading ? (

@@ -39,7 +39,7 @@ async function TicketsPage({
 }: {
   searchParams: Promise<SearchParams>;
 }) {
-  let { tab = "Newest" } = await searchParams;
+  const { tab = "Newest" } = await searchParams;
 
   const validTab = Object.keys(tabsData).includes(tab.toLowerCase())
     ? tab.toLowerCase()

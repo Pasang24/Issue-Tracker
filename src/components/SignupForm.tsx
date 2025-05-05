@@ -10,7 +10,6 @@ import {
   Legend,
 } from "@headlessui/react";
 import Link from "next/link";
-import { User } from "@/types/User";
 
 function SignupForm() {
   const [name, setName] = useState("");
@@ -36,10 +35,6 @@ function SignupForm() {
       if (!response.ok) {
         throw new Error("Login Failed");
       }
-
-      const userData: User = await response.json();
-
-      console.log(userData);
     } catch (error) {
       console.log(`Login error: ${error}`);
     } finally {

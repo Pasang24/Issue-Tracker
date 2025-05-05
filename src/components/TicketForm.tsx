@@ -25,8 +25,7 @@ function TicketForm() {
 
     try {
       startTransition(async () => {
-        const ticket = await createTicket(title, description);
-        console.log(ticket);
+        await createTicket(title, description);
       });
       router.replace("/tickets");
     } catch (error) {
