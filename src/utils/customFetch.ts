@@ -1,18 +1,14 @@
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 
 const internalFetch = async (url: string, options: RequestInit) => {
-  const incomingHeaders = await headers();
-  const incomingHeadersObj: Record<string, string> = {};
-
-  incomingHeaders.forEach((value, key) => {
-    incomingHeadersObj[key] = value;
-  });
+  const cookie = await cookies();
+  const token = cookie.get("token")?.value;
 
   return await fetch(url, {
     ...options,
     headers: {
+      "Cookie": `token=${token}`,
       ...options.headers,
-      ...incomingHeadersObj,
     },
   });
 };
