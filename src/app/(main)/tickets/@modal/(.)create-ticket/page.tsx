@@ -16,9 +16,9 @@ function InterceptedCreateTicketPage() {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    if (pathname === "/tickets/create-ticket") {
-      setIsOpen(true);
-    } else {
+    setIsOpen(true);
+    if (pathname !== "/tickets/create-ticket") {
+      document.body.style.overflow = "scroll";
       setIsOpen(false);
     }
     return () => {
