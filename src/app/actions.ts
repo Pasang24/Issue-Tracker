@@ -36,3 +36,16 @@ export async function createTicket(title: string, description: string) {
   const { ticket }: { ticket: Ticket } = await respose.json();
   return ticket;
 }
+
+export async function fetchTicket(ticketId: string) {
+  const response = await internalFetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/ticket/find-ticket/${ticketId}`,
+    {
+      method: "GET",
+    }
+  );
+
+  const { ticket }: { ticket: Ticket } = await response.json();
+
+  return ticket;
+}
