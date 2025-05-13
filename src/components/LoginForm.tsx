@@ -1,110 +1,28 @@
 "use client";
-
-import { useState, useContext } from "react";
-import {
-  Button,
-  Field,
-  Fieldset,
-  Input,
-  Label,
-  Legend,
-} from "@headlessui/react";
-import Link from "next/link";
-import { User } from "@/types/User";
-import { useRouter } from "next/navigation";
-import { UserContext } from "@/context/UserProvider";
+import { Button } from "@headlessui/react";
+import Image from "next/image";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const { setUser } = useContext(UserContext);
-  const router = useRouter();
-
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-          credentials: "include",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Login Failed");
-      }
-
-      const { user }: { user: User } = await response.json();
-
-      setUser(user);
-
-      router.replace("/tickets");
-    } catch (error) {
-      console.log(`Login error: ${error}`);
-      setLoading(false);
-    }
+  const handleLogin = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/register`;
   };
-
   return (
-    <form onSubmit={handleLogin}>
-      <Fieldset
-        disabled={loading}
-        className="flex flex-col gap-2 w-[90%] max-w-[500px] mx-auto mt-6 rounded-md"
+    <div className="flex flex-col justify-center items-center gap-2 w-[90%] mx-auto mt-30 mb-6">
+      <span className="text-lg text-center">Please Login with google</span>
+      <Button
+        onClick={handleLogin}
+        className="flex gap-2 cursor-pointer border border-[#DFD9D9] text-gray-400 p-2 rounded-full hover:bg-gray-200 transition"
       >
-        <Legend className="font-semibold text-2xl text-center">
-          Welcome Back
-        </Legend>
-        <Field className="flex flex-col gap-1">
-          <Label className="text-sm">Enter your Email</Label>
-          <Input
-            type="email"
-            required
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder="example@gmail.com"
-            className="border border-[#DFD9D9] p-2 rounded-sm data-disabled:text-gray-400"
-          />
-        </Field>
-        <Field className="flex flex-col gap-1">
-          <Label className="text-sm">Enter your Password</Label>
-          <Input
-            type="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            placeholder="********"
-            className="border border-[#DFD9D9] p-2 rounded-sm data-disabled:text-gray-400"
-          />
-        </Field>
-        <Button
-          type="submit"
-          className="bg-[#B5EA5F] text-white font-semibold rounded-sm p-2 mt-2 data-disabled:opacity-70"
-        >
-          {loading ? "Logging In..." : "Login"}
-        </Button>
-        <Link
-          href="/forgot-password"
-          className="text-center text-sm hover:underline"
-        >
-          Forgot Password?
-        </Link>
-        <span className="text-center text-[#B4ABAB]">OR</span>
-        <Link
-          href="/signup"
-          className="bg-[#4D5CDD] text-center text-white font-semibold rounded-sm p-2"
-        >
-          Create New Account
-        </Link>
-      </Fieldset>
-    </form>
+        <Image
+          src="/icons/Google.png"
+          width={20}
+          height={20}
+          alt="Google Icon"
+          className="w-fit self-center"
+        />
+        Continue with Google
+      </Button>
+    </div>
   );
 }
 
