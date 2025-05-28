@@ -9,13 +9,20 @@ import {
   Textarea,
   Label,
   Legend,
+  Select,
+  Combobox,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions,
 } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import UserSelect from "./UserSelect";
 
 function TicketForm() {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("rides");
   const [pending, startTransition] = useTransition();
 
   const router = useRouter();
@@ -59,7 +66,25 @@ function TicketForm() {
           />
         </Field>
         <Field className="flex flex-col gap-1">
-          <Label className="text-sm">Add a description</Label>
+          <Label className="text-sm">Select a category</Label>
+          <Select
+            name="category"
+            aria-label="Ticket Category"
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+            className="border border-gray-300 p-2 rounded-sm"
+          >
+            <option value="rides">Rides</option>
+            <option value="food">Food</option>
+            <option value="route">Route</option>
+          </Select>
+        </Field>
+        <Field className="flex items-center gap-2">
+          <Label className="text-sm whitespace-nowrap">Assign to: </Label>
+          <UserSelect />
+        </Field>
+        <Field className="flex flex-col gap-1">
+          <Label className="text-sm text-nowrap">Add a description</Label>
           <Textarea
             name="description"
             value={description}
